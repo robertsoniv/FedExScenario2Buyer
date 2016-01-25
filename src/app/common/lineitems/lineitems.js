@@ -28,7 +28,9 @@ function LineItemFactory($rootScope, $q, $state, $uibModal, Underscore, OrderClo
                                 $state.reload();
                             });
                         }
-                        else $state.reload();
+                        else {
+                            $state.reload();
+                        }
                     });
             });
     }
@@ -37,7 +39,7 @@ function LineItemFactory($rootScope, $q, $state, $uibModal, Underscore, OrderClo
         if (LineItem.Quantity > 0) {
             OrderCloud.LineItems.Patch(Order.ID, LineItem.ID, {Quantity: LineItem.Quantity})
                 .then(function() {
-                    $rootScope.$broadcast('LineItemQuantityUpdated', LineItem.ID);
+                    $rootScope.$broadcast('OC:UpdateOrder', Order.ID);
                 });
         }
     }
@@ -100,11 +102,11 @@ function SpecConverter(specs) {
             if (spec.DefaultOptionID) {
                 spec_to_push.OptionID = spec.DefaultOptionID;
             }
+            if (spec.OptionID) {
+                spec_to_push.OptionID = spec.OptionID;
+            }
             if (spec.Value) {
                 spec_to_push.Value = spec.Value;
-            }
-            else if (spec.OptionID) {
-                spec_to_push.OptionID = spec.OptionID;
             }
         }
         else {
