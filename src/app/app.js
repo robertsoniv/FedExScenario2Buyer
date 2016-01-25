@@ -17,7 +17,6 @@ angular.module( 'orderCloud', [
     'ordercloud-assignment-helpers',
     'ordercloud-paging-helpers',
     'ordercloud-auto-id',
-    'ordercloud-impersonation',
     'ordercloud-current-order',
     'ordercloud-address',
     'ordercloud-lineitems',
@@ -52,7 +51,7 @@ function ErrorHandling( $provide ) {
 	}
 }
 
-function AppCtrl( $rootScope, $state, appname, Auth, ImpersonationService ) {
+function AppCtrl( $rootScope, $state, appname, OrderCloud ) {
 	var vm = this;
 	vm.name = appname;
 	vm.title = appname;
@@ -69,14 +68,6 @@ function AppCtrl( $rootScope, $state, appname, Auth, ImpersonationService ) {
 		$state.go('login');
 	};
 
-    vm.EndImpersonation = ImpersonationService.StopImpersonating;
-    vm.isImpersonating = !!Auth.GetImpersonating();
-    $rootScope.$on('ImpersonationStarted', function() {
-        vm.isImpersonating = true;
-    });
-    $rootScope.$on('ImpersonationStopped', function() {
-        vm.isImpersonating = false;
-    });
 	$rootScope.$on('$stateChangeSuccess', function(e, toState) {
 		if (toState.data && toState.data.componentName) {
 			vm.title = appname + ' - ' + toState.data.componentName
