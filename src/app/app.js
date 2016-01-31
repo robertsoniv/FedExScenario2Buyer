@@ -48,7 +48,7 @@ function SetupPrintIntegration($http, $cookieStore) {
 }
 
 function SetBuyerID( OrderCloud, buyerid ) {
-	OrderCloud.BuyerID.Get() ? angular.noop() : OrderCloud.BuyerID.Set(buyerid);
+	OrderCloud.BuyerID.Set(buyerid);
 }
 
 function Routing( $urlRouterProvider, $urlMatcherFactoryProvider ) {
