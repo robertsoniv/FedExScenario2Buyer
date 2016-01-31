@@ -4,8 +4,19 @@ angular.module('orderCloud')
     .directive('specSelectField', SpecSelectionDirective)
     .controller('ProductCtrl', ProductController)
     .controller('LineItemEditCtrl', LineItemEditController)
+    .directive('variableProductForm', VariableProductFormDirective)
 
 ;
+
+function VariableProductFormDirective() {
+    return {
+        restrict: 'E',
+        scope: {
+            formmodel: '='
+        },
+        templateUrl: 'catalog/product/templates/variableProduct.form.tpl.html'
+    };
+}
 
 function ProductConfig($stateProvider) {
     $stateProvider
