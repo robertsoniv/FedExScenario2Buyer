@@ -158,6 +158,10 @@ function ProductController($cookieStore, $http, Product, SpecList, Order, PrintP
         });
     }
 
+    vm.CreateVariant = function() {
+
+    }
+
     vm.UpdateVariant = function() {
         var user = $cookieStore.get('print_login');
         $http({ method: 'POST', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/variant', data: vm.selectedVariant, headers: { 'Authorization': user.Auth}}).success(function(data) {
