@@ -172,7 +172,10 @@ function ProductController($cookieStore, $timeout, $http, Product, SpecList, Ord
     };
 
     vm.CreateVariant = function() {
-
+        vm.selectedVariant = {
+            "ProductInteropID": vm.item.ID,
+            "Specs": PrintProduct.data.Specs
+        };
     }
 
     vm.UpdateVariant = function() {

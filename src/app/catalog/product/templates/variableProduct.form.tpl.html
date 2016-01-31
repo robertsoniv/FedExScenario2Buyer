@@ -2,11 +2,10 @@
 	<div class="row">
 		<div class="col-xs-6">
 			<figure>
-				<img ng-if="$parent.product.showImage" class="img-thumbnail" ng-src="{{formmodel.PreviewUrl + '?time=' + $parent.product.imageRefeshTime.getTime()}}"/>
+				<img ng-if="$parent.$parent.product.showImage" class="img-thumbnail" ng-src="{{formmodel.PreviewUrl + '?time=' + $parent.$parent.product.imageRefeshTime.getTime()}}"/>
 			</figure>
 		</div>
 		<div class="col-xs-6">
-
 			<h4 class="page-header">Update variant</h4>
 			<fieldset class="form-group row">
 				<div class="col-sm-6">
