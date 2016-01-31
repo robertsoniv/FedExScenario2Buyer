@@ -52,7 +52,7 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <figure>
-                                <img class="img-thumbnail" ng-src="{{product.selectedVariant.PreviewUrl}}"/>
+                                <img ng-if="product.showImage" class="img-thumbnail" ng-src="{{product.selectedVariant.PreviewUrl + '?time=' + product.imageRefeshTime.getTime()}}"/>
                             </figure>
                         </div>
                         <div class="col-xs-6">
