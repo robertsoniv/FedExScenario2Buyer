@@ -157,7 +157,7 @@ function CheckoutController($state, $rootScope, Order, OrderCloud, ShippingAddre
     });
 }
 
-function OrderConfirmationController(Order, CurrentOrder, OrderCloud, $state, isMultipleAddressShipping, $exceptionHandler, LineItemsList) {
+function OrderConfirmationController(Order, CurrentOrder, OrderCloud, $state, OrderShippingAddress, isMultipleAddressShipping, $exceptionHandler, LineItemsList) {
     var vm = this;
     vm.currentOrder = Order;
     vm.lineItems = LineItemsList;
@@ -166,6 +166,7 @@ function OrderConfirmationController(Order, CurrentOrder, OrderCloud, $state, is
     vm.submitOrder = function() {
         OrderCloud.Orders.Submit(vm.currentOrder.ID)
             .then(function() {
+                OrderShippingAddress.clear();
                 CurrentOrder.Remove()
                     .then(function(){
                         $state.go('orderReview', {orderid: vm.currentOrder.ID})
