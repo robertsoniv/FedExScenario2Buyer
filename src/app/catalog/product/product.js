@@ -157,6 +157,13 @@ function ProductController($cookieStore, $http, Product, SpecList, Order, PrintP
             vm.selectedVariant = data;
         });
     }
+
+    vm.UpdateVariant = function() {
+        var user = $cookieStore.get('print_login');
+        $http({ method: 'POST', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/variant', data: vm.selectedVariant, headers: { 'Authorization': user.Auth}}).success(function(data) {
+            vm.selectedVariant = data;
+        });
+    }
 }
 
 function LineItemEditController($state, Underscore, LineItem, OrderCloud, LineItemHelpers, LI_Product, LI_SpecList) {

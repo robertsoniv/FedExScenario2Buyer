@@ -38,9 +38,12 @@
         </div>
         <div>
             <img ng-src="{{product.selectedVariant.PreviewUrl}}"><br />
-            <div ng-repeat="spec in product.selectedVariant.Specs">
-                <span>{{spec.Name}}: <input ng-model="spec.Value"></span>
-            </div>
+            <form ng-submit="product.UpdateVariant()">
+                <div ng-repeat="spec in product.selectedVariant.Specs">
+                    <span>{{spec.Name}}: <input type="text" ng-model="spec.Value"></span>
+                </div>
+                <div><input type="submit" value="Save" /></div>
+            </form>
         </div>
     </div>
 </div>
