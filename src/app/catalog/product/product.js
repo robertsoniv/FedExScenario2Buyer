@@ -45,6 +45,10 @@ function ProductConfig($stateProvider) {
 
                         });
                     return dfd.promise;
+                },
+                PrintProduct: function($http, $cookieStore) {
+                    var user = $cookieStore.get('print_login');
+                    return $http({ method: 'GET', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/Products/45178926', headers: { 'Authorization': user.Auth}});
                 }
             }
         })
@@ -140,11 +144,19 @@ function SpecSelectionDirective(OrderCloud) {
     };
 }
 
-function ProductController(Product, SpecList, Order) {
+function ProductController($cookieStore, $http, Product, SpecList, Order, PrintProduct) {
     var vm = this;
     vm.item = Product;
     vm.order = Order;
     vm.item.Specs = SpecList;
+    vm.printVariants = PrintProduct.data.Variants;
+
+    vm.GetVariant = function(id) {
+        var user = $cookieStore.get('print_login');
+        $http({ method: 'GET', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/variant', params: {'ProductInteropID': PrintProduct.data.InteropID, 'VariantInteropID': id}, headers: { 'Authorization': user.Auth}}).success(function(data) {
+            vm.selectedVariant = data;
+        });
+    }
 }
 
 function LineItemEditController($state, Underscore, LineItem, OrderCloud, LineItemHelpers, LI_Product, LI_SpecList) {

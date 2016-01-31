@@ -25,5 +25,22 @@
     </div>
     <div class="panel-body">
         {{product.item.Description}}
+
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Variants</h3>
+    </div>
+    <div class="panel-body">
+        <div ng-repeat="variant in product.printVariants">
+            <a ng-click="product.GetVariant(variant.InteropID)">{{variant}}</a>
+        </div>
+        <div>
+            <img ng-src="{{product.selectedVariant.PreviewUrl}}"><br />
+            <div ng-repeat="spec in product.selectedVariant.Specs">
+                <span>{{spec.Name}}: <input ng-model="spec.Value"></span>
+            </div>
+        </div>
     </div>
 </div>

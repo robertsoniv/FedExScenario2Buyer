@@ -1,6 +1,6 @@
 {
-  "appname": "Scenario2",
+  "appname": "FedExFranchiseBuyer",
   "ocscope": "FullAccess",
-  "clientid": "2E4B4F70-79A7-4E7C-8D38-88D429084FCD",
-  "buyerid": "subway"
+  "clientid": "1306d1bc-7564-4988-bdae-bcb974b7a5f1",
+  "buyerid": "FedExFranchiseBuyer"
 }

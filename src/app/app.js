@@ -27,8 +27,25 @@ angular.module( 'orderCloud', [
 	.run( SetBuyerID )
 	.config( Routing )
 	.config( ErrorHandling )
+	.run( SetupPrintIntegration )
 	.controller( 'AppCtrl', AppCtrl )
 ;
+
+function SetupPrintIntegration($http, $cookieStore) {
+	return $http({ method: 'GET', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/login', params: { 'Password': 'fails345', 'Username': 'oc_user' }})
+		.success(function(user, status, headers, config) {
+			var currentUser = {
+				SiteID: user.SiteID,
+				Username: user.Username,
+				InteropID: user.InteropID,
+				FirstName: user.FirstName,
+				LastName: user.LastName,
+				Email: user.Email,
+				Auth: headers()['www-authenticate']
+			};
+			$cookieStore.put('print_login', currentUser);
+		});
+}
 
 function SetBuyerID( OrderCloud, buyerid ) {
 	OrderCloud.BuyerID.Get() ? angular.noop() : OrderCloud.BuyerID.Set(buyerid);
