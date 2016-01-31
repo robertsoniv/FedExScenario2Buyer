@@ -57,7 +57,9 @@ function OrderInputController($state, appname, $scope, $rootScope, $localForage,
                 AddLineItem(order, $scope.product);
             })
             .catch(function() {
-                OrderCloud.Orders.Create({})
+                OrderCloud.Orders.Create({
+                    PaymentMethod: 'PurchaseOrder'
+                })
                     .then(function(order) {
                         CurrentOrder.Set(order.ID);
                         AddLineItem(order, $scope.product);

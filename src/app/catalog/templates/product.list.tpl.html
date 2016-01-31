@@ -22,9 +22,9 @@
                         <div class="item-price"><p>{{product.StandardPriceSchedule.PriceBreaks[0].Price | currency}} x {{product.StandardPriceSchedule.PriceBreaks[0].Quantity}}</p></div>
                         <div class="item-description" ng-if="product.Description">
                             <p>{{product.Description}}</p>
-                            <div class="text-center" ng-if="product.xp.Mandatory"><span class="label label-primary">Mandatory</span></div>
                         </div>
                     </div>
+                    <div ng-if="product.xp.Mandatory" class="mandatory">Mandatory</div>
                 </div>
             </div>
 

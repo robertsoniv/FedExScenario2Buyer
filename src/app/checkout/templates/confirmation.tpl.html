@@ -1,4 +1,4 @@
-<article class="container-fluid">
+<article class="container">
 	<h3 class="page-header">
 		Order Confirmation
 	</h3>
@@ -21,6 +21,7 @@
     <div class="panel panel-default">
         <div class="panel-heading"><b>Payment Information</b></div>
         <div class="panel-body">
+            <div><b>Franchise ID:</b> {{orderConfirmation.currentOrder.xp.FranchiseID}}</div>
             <div ng-if="orderConfirmation.currentOrder.PaymentMethod == 'CreditCard'">
                 <p>Cardholder Name: {{orderConfirmation.currentOrder.CreditCard.CardholderName}}</p>
                 <p><i class="fa fa-cc-visa fa-2x"></i> ending in {{orderConfirmation.currentOrder.CreditCard.PartialAccountNumber}}</p>

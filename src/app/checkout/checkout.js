@@ -104,7 +104,7 @@ function CheckoutController($state, $rootScope, Order, OrderCloud, ShippingAddre
     vm.isMultipleAddressShipping = true;
 
     vm.orderIsValid = false;
-    if(vm.currentOrder.BillingAddress && vm.currentOrder.BillingAddress.ID != null && vm.currentOrder.PaymentMethod != null){
+    if(vm.currentOrder.BillingAddress && vm.currentOrder.BillingAddress.ID != null && vm.currentOrder.PaymentMethod != null && (vm.currentOrder.xp && vm.currentOrder.xp.FranchiseID)){
         vm.orderIsValid = true;
     }
 

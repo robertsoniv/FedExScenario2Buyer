@@ -9,7 +9,6 @@
                 </div>
                 <div class="panel-body">
                     {{product.item.Description}}
-
                 </div>
             </div>
         </div>
@@ -126,7 +125,8 @@
                     <h3 class="panel-title">Description</h3>
                 </div>
                 <div class="panel-body">
-                    {{product.item.Description}}
+                    <p>{{product.item.Description}}</p>
+                    <p ng-if="product.item.xp.Mandatory"><b>Placement Instructions: </b><br>{{product.item.xp.PlacementInstructions}}</p>
                 </div>
             </div>
         </div>

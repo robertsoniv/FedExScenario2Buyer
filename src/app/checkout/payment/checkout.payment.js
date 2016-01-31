@@ -31,6 +31,7 @@ function CheckoutPaymentController($state, AvailableCreditCards, AvailableSpendi
         {Display: 'Spending Account', Value: 'SpendingAccount'}//,
         //{Display: 'Pay Pal Express Checkout', Value: 'PayPalExpressCheckout'}
     ];
+
     vm.CreditCardTypes = [
         'MasterCard',
         'American Express',
@@ -45,6 +46,7 @@ function CheckoutPaymentController($state, AvailableCreditCards, AvailableSpendi
     vm.saveCreditCard = SaveCreditCard;
     vm.setSpendingAccount = SetSpendingAccount;
     vm.setPaymentMethod = SetPaymentMethod;
+    vm.setFranchiseID = SetFranchiseID;
 
     function SetPaymentMethod(order) {
         if (order.PaymentMethod) {
@@ -54,7 +56,14 @@ function CheckoutPaymentController($state, AvailableCreditCards, AvailableSpendi
                     $state.reload();
                 });
         }
-    }
+    };
+
+    function SetFranchiseID(order) {
+        OrderCloud.Orders.Update(order.ID, order)
+            .then(function() {
+                $state.reload();
+            })
+    };
 
     function SaveCreditCard(order) {
         // TODO: Needs to save the credit card with integration plug in

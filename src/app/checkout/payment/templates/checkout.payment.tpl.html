@@ -1,11 +1,17 @@
 <div class="panel panel-default">
     <div class="panel-heading">Payment</div>
     <div class="panel-body">
+        <div class="form-group">
+            <label for="franchise_ID">Franchise ID:</label>
+            <input type="text" id="franchise_ID" class="form-control" ng-blur="checkoutPayment.setFranchiseID(checkout.currentOrder)" ng-model="checkout.currentOrder.xp.FranchiseID" required>
+        </div>
+    </div>
+    <!--<div class="panel-body">
         <label for="payment_method">Payment Method</label>
         <select id="payment_method" required="true" ng-change="checkoutPayment.setPaymentMethod(checkout.currentOrder)" class="form-control" ng-model="checkout.currentOrder.PaymentMethod" ng-options="paymentMethod.Value as paymentMethod.Display for paymentMethod in checkoutPayment.paymentMethods"></select>
         <div ng-switch="checkout.currentOrder.PaymentMethod">
             <div ng-switch-when="PurchaseOrder">
-                <!--Nothing to do here yet-->
+                &lt;!&ndash;Nothing to do here yet&ndash;&gt;
             </div>
             <div ng-switch-when="CreditCard">
                 <div ng-if="!checkoutPayment.createNewCard">
@@ -58,5 +64,5 @@
                 <select id="spending_account" ng-required="checkout.PaymentMethod === 'SpendingAccount'" ng-change="checkoutPayment.setSpendingAccount(checkout.currentOrder)" class="form-control" ng-model="checkout.currentOrder.SpendingAccountID" ng-options="spendingAccount.ID as spendingAccount.Name for spendingAccount in checkoutPayment.spendingAccounts"></select>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
