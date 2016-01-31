@@ -1,58 +1,60 @@
-<div class="row" ng-form="variable_product_form">
-	<div class="col-xs-6">
-		<figure>
-			<img ng-if="$parent.product.showImage" class="img-thumbnail" ng-src="{{formmodel.PreviewUrl + '?time=' + $parent.product.imageRefeshTime.getTime()}}"/>
-		</figure>
-	</div>
-	<div class="col-xs-6">
+<div ng-form="variable_product_form">
+	<div class="row">
+		<div class="col-xs-6">
+			<figure>
+				<img ng-if="$parent.product.showImage" class="img-thumbnail" ng-src="{{formmodel.PreviewUrl + '?time=' + $parent.product.imageRefeshTime.getTime()}}"/>
+			</figure>
+		</div>
+		<div class="col-xs-6">
 
-		<h4 class="page-header">Update variant</h4>
-		<fieldset class="form-group row">
-			<div class="col-sm-6">
-				<label for="{{formmodel.Specs.Name.ID}}">{{formmodel.Specs.Name.Name}}</label>
-				<input id="{{formmodel.Specs.Name.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Name.Value"/>
-			</div>
-			<div class="col-sm-6">
-				<label for="{{formmodel.Specs.Title.ID}}">{{formmodel.Specs.Title.Name}}</label>
-				<input id="{{formmodel.Specs.Title.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Title.Value"/>
-			</div>
-		</fieldset>
-		<fieldset class="form-group">
-			<label for="{{formmodel.Specs.Email.ID}}">{{formmodel.Specs.Email.Name}}</label>
-			<input id="{{formmodel.Specs.Email.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Email.Value"/>
-		</fieldset>
-		<fieldset class="form-group">
-			<label for="{{formmodel.Specs.Website.ID}}">{{formmodel.Specs.Website.Name}}</label>
-			<input id="{{formmodel.Specs.Website.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Website.Value"/>
-		</fieldset>
-		<hr>
+			<h4 class="page-header">Update variant</h4>
+			<fieldset class="form-group row">
+				<div class="col-sm-6">
+					<label for="{{formmodel.Specs.Name.ID}}">{{formmodel.Specs.Name.Name}}</label>
+					<input id="{{formmodel.Specs.Name.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Name.Value"/>
+				</div>
+				<div class="col-sm-6">
+					<label for="{{formmodel.Specs.Title.ID}}">{{formmodel.Specs.Title.Name}}</label>
+					<input id="{{formmodel.Specs.Title.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Title.Value"/>
+				</div>
+			</fieldset>
+			<fieldset class="form-group">
+				<label for="{{formmodel.Specs.Email.ID}}">{{formmodel.Specs.Email.Name}}</label>
+				<input id="{{formmodel.Specs.Email.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Email.Value"/>
+			</fieldset>
+			<fieldset class="form-group">
+				<label for="{{formmodel.Specs.Website.ID}}">{{formmodel.Specs.Website.Name}}</label>
+				<input id="{{formmodel.Specs.Website.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Website.Value"/>
+			</fieldset>
+			<hr>
+		</div>
 	</div>
+	<fieldset class="form-group">
+		<label for="{{formmodel.Specs.Address.ID}}">{{formmodel.Specs.Address.Name}}</label>
+		<input id="{{formmodel.Specs.Address.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Address.Value"/>
+	</fieldset>
+	<fieldset class="form-group row">
+		<div class="col-sm-6">
+			<label for="{{formmodel.Specs.City.ID}}">{{formmodel.Specs.City.Name}}</label>
+			<input id="{{formmodel.Specs.City.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.City.Value"/>
+		</div>
+		<div class="col-sm-6">
+			<label for="{{formmodel.Specs.State.ID}}">{{formmodel.Specs.State.Name}}</label>
+			<input id="{{formmodel.Specs.State.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.State.Value"/>
+		</div>
+	</fieldset>
+	<fieldset class="form-group row">
+		<div class="col-sm-5">
+			<label for="{{formmodel.Specs.Zip.ID}}">{{formmodel.Specs.Zip.Name}}</label>
+			<input id="{{formmodel.Specs.Zip.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Zip.Value"/>
+		</div>
+		<div class="col-sm-7">
+			<label for="{{formmodel.Specs.Phone.ID}}">{{formmodel.Specs.Phone.Name}}</label>
+			<input id="{{formmodel.Specs.Phone.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Phone.Value"/>
+		</div>
+	</fieldset>
+	<fieldset class="form-group">
+		<label for="{{formmodel.Specs.Logo_upload.ID}}">{{formmodel.Specs.Logo_upload.Name}}</label>
+		<input id="{{formmodel.Specs.Logo_upload.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Logo_upload.Value"/>
+	</fieldset>
 </div>
-<fieldset class="form-group">
-	<label for="{{formmodel.Specs.Address.ID}}">{{formmodel.Specs.Address.Name}}</label>
-	<input id="{{formmodel.Specs.Address.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Address.Value"/>
-</fieldset>
-<fieldset class="form-group row">
-	<div class="col-sm-6">
-		<label for="{{formmodel.Specs.City.ID}}">{{formmodel.Specs.City.Name}}</label>
-		<input id="{{formmodel.Specs.City.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.City.Value"/>
-	</div>
-	<div class="col-sm-6">
-		<label for="{{formmodel.Specs.State.ID}}">{{formmodel.Specs.State.Name}}</label>
-		<input id="{{formmodel.Specs.State.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.State.Value"/>
-	</div>
-</fieldset>
-<fieldset class="form-group row">
-	<div class="col-sm-5">
-		<label for="{{formmodel.Specs.Zip.ID}}">{{formmodel.Specs.Zip.Name}}</label>
-		<input id="{{formmodel.Specs.Zip.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Zip.Value"/>
-	</div>
-	<div class="col-sm-7">
-		<label for="{{formmodel.Specs.Phone.ID}}">{{formmodel.Specs.Phone.Name}}</label>
-		<input id="{{formmodel.Specs.Phone.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Phone.Value"/>
-	</div>
-</fieldset>
-<fieldset class="form-group">
-	<label for="{{formmodel.Specs.Logo_upload.ID}}">{{formmodel.Specs.Logo_upload.Name}}</label>
-	<input id="{{formmodel.Specs.Logo_upload.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Logo_upload.Value"/>
-</fieldset>
