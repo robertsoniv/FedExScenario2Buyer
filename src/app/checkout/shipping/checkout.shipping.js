@@ -27,13 +27,18 @@ function CheckoutShippingController($state, $rootScope, OrderCloud, OrderShippin
     function saveShipAddress(order) {
         if (order && order.ShippingAddressID) {
             OrderShippingAddress.Set(order.ShippingAddressID);
-            OrderCloud.Addresses.Get(order.ShippingAddressID)
-                .then(function(address){
-                    OrderCloud.Orders.SetShippingAddress(order.ID, address)
-                        .then(function() {
-                            $rootScope.$broadcast('OrderShippingAddressChanged', order, address);
-                        });
-                })
+            OrderCloud.Orders.Patch(order.ID, {ShippingAddressID: order.ShippingAddressID})
+                .then(function() {
+                    $state.reload();
+                    //$rootScope.$broadcast('OrderShippingAddressChanged', order, address);
+                });
+            //OrderCloud.Addresses.Get(order.ShippingAddressID)
+            //    .then(function(address){
+            //        OrderCloud.Orders.SetShippingAddress(order.ID, address)
+            //            .then(function() {
+            //                $rootScope.$broadcast('OrderShippingAddressChanged', order, address);
+            //            });
+            //    })
 
         }
     }

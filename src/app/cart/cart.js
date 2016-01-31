@@ -55,17 +55,28 @@ function CartConfig($stateProvider) {
                             dfd.reject();
                         });
                     return dfd.promise;
+                },
+                UnorderedMandatoryProducts: function(OrderCloud, Underscore, buyerid, LineItemsList) {
+                    return OrderCloud.Products.List()
+                        .then(function(data) {
+                            var mandatoryProducts = Underscore.filter(data.Items, function(item) {return item.xp.Mandatory});
+                            var orderedMandatoryProducts = Underscore.pluck(Underscore.filter(LineItemsList.Items, function(item) {return item.Product.xp.Mandatory}), 'Product');
+                            var unorderedMandatoryProductIDs = Underscore.difference(Underscore.pluck(mandatoryProducts, 'ID'), Underscore.pluck(orderedMandatoryProducts, 'ID'));
+                            var unorderedMandatoryProducts = Underscore.filter(mandatoryProducts, function(p) {return unorderedMandatoryProductIDs.indexOf(p.ID) > -1});
+                            return unorderedMandatoryProducts;
+                        })
                 }
             }
         });
 }
 
-function CartController($q, $rootScope, OrderCloud, Order, LineItemsList, LineItemHelpers) {
+function CartController($q, $rootScope, OrderCloud, Order, LineItemsList, LineItemHelpers, UnorderedMandatoryProducts) {
     var vm = this;
     vm.order = Order;
     vm.lineItems = LineItemsList;
     vm.removeItem = LineItemHelpers.RemoveItem;
     vm.updateQuantity = LineItemHelpers.UpdateQuantity;
+    vm.mandatoryProducts = UnorderedMandatoryProducts;
     vm.pagingfunction = PagingFunction;
 
     function PagingFunction() {

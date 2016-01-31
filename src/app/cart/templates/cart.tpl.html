@@ -1,4 +1,15 @@
 <article class="container" id="cart_view">
+    <div class="panel panel-warning" ng-if="cart.mandatoryProducts.length">
+        <div class="panel-heading">
+            <h3 class="panel-title">Missing {{cart.mandatoryProducts.length + (cart.mandatoryProducts.length == 1 ? ' mandatory product' : ' mandatory products')}}</h3>
+        </div>
+        <div class="list-group">
+            <a href="" ui-sref="catalog.product({'productid':mp.ID})" class="list-group-item" ng-repeat="mp in cart.mandatoryProducts">
+                <p><b>{{mp.Name}}</b><br>
+                <small class="text-muted">{{mp.ID}}</small></p>
+            </a>
+        </div>
+    </div>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">
@@ -56,5 +67,6 @@
             <p class="lead">Subtotal: <span class="text-success pull-right">{{cart.order.Subtotal | currency}}</span></p>
         </div>
     </div>
-    <button type="button" ui-sref="checkout" class="btn btn-success pull-right">Checkout</button>
+    <p class="text-right text-danger" ng-if="cart.mandatoryProducts.length">You must order all mandatory products before you can checkout.</p>
+    <button type="button" ui-sref="checkout" class="btn btn-success pull-right" ng-disabled="cart.mandatoryProducts.length">Checkout</button>
 </article>

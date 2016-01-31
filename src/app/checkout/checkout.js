@@ -8,7 +8,7 @@ angular.module('orderCloud')
     .controller('CheckoutLineItemsCtrl', CheckoutLineItemsController)
     .controller('ConfirmationLineItemsCtrl', ConfirmationLineItemsController)
     //toggle isMultipleAddressShipping if you do not wish to allow line items to ship to multiple addresses
-    .constant('isMultipleAddressShipping', true);
+    .constant('isMultipleAddressShipping', false);
 ;
 
 function checkoutConfig($stateProvider) {
@@ -32,6 +32,30 @@ function checkoutConfig($stateProvider) {
                             if ($state.current.name.indexOf('checkout') > -1) {
                                 $state.go('home');
                             }
+                            dfd.reject();
+                        });
+                    return dfd.promise;
+                },
+                LineItemsList: function($q, $state, Order, Underscore, OrderCloud, toastr, LineItemHelpers) {
+                    var dfd = $q.defer();
+                    OrderCloud.LineItems.Get(Order.ID)
+                        .then(function(data) {
+                            if (!data.Items.length) {
+                                toastr.error("Your order does not contain any line items.", 'Error');
+                                if ($state.current.name === 'cart') {
+                                    $state.go('home');
+                                }
+                                dfd.reject();
+                            }
+                            else {
+                                LineItemHelpers.GetProductInfo(data.Items)
+                                    .then(function() {
+                                        dfd.resolve(data);
+                                    });
+                            }
+                        })
+                        .catch(function() {
+                            toastr.error("Your order does not contain any line items.", 'Error');
                             dfd.reject();
                         });
                     return dfd.promise;
@@ -95,13 +119,13 @@ function checkoutConfig($stateProvider) {
 
 }
 
-function CheckoutController($state, $rootScope, Order, OrderCloud, ShippingAddresses, OrderShipAddress, OrderShippingAddress) {
+function CheckoutController($state, $rootScope, Order, OrderCloud, ShippingAddresses, OrderShipAddress, OrderShippingAddress, isMultipleAddressShipping) {
     var vm = this;
     vm.currentOrder = Order;
     vm.currentOrder.ShippingAddressID = OrderShipAddress ? OrderShipAddress.ID : null;
     vm.currentOrder.ShippingAddress = OrderShipAddress;
     vm.shippingAddresses = ShippingAddresses;
-    vm.isMultipleAddressShipping = true;
+    vm.isMultipleAddressShipping = isMultipleAddressShipping;
 
     vm.orderIsValid = false;
     if(vm.currentOrder.BillingAddress && vm.currentOrder.BillingAddress.ID != null && vm.currentOrder.PaymentMethod != null && (vm.currentOrder.xp && vm.currentOrder.xp.FranchiseID)){
@@ -133,9 +157,10 @@ function CheckoutController($state, $rootScope, Order, OrderCloud, ShippingAddre
     });
 }
 
-function OrderConfirmationController(Order, CurrentOrder, OrderCloud, $state, isMultipleAddressShipping, $exceptionHandler) {
+function OrderConfirmationController(Order, CurrentOrder, OrderCloud, $state, isMultipleAddressShipping, $exceptionHandler, LineItemsList) {
     var vm = this;
     vm.currentOrder = Order;
+    vm.lineItems = LineItemsList;
     vm.isMultipleAddressShipping = isMultipleAddressShipping;
 
     vm.submitOrder = function() {

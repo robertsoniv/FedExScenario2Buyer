@@ -1,6 +1,6 @@
 <article class="container">
 	<h3 class="page-header">
-		Order Review
+		Order Receipt
 	</h3>
     <div class="form-group hidden-print">
         <button class="btn btn-default" ng-click="orderReview.print()">Print</button>
@@ -17,7 +17,7 @@
             <div class="panel-heading"><b>Shipping Address</b></div>
             <div class="panel-body">
                 <div>
-                    <p id="address_paragraph">{{orderReview.lineItems.Items[0].ShippingAddress | address: 'full'}}</p>
+                    <p id="address_paragraph">{{orderReview.LineItems.Items[0].ShippingAddress | address: 'full'}}</p>
                 </div>
             </div>
         </div>
@@ -39,29 +39,26 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-heading"><b>Line Items</b></div>
-            <div class="panel-body">
-                <div>
-                    <table class="table table-hover">
-                        <tbody>
-                        <colgroup>
-                            <col style="width:100px;">
-                        </colgroup>
-                        <tr ng-repeat="lineItem in orderReview.LineItems.Items track by $index" class="item_info">
-                            <td class="text-center">
-                                {{lineItem.Quantity}}
-                            </td>
-                            <td>
-                                <a href="#">{{lineItem.Product.Name}}</a><br>
-                                <small class="text-muted">{{lineItem.ProductID}}</small></br>
-                            </td>
-                            <td ng-if="orderReview.isMultipleAddressShipping">
-                                <label>Shipping To:</label>
-                                <p>{{lineItem.ShippingAddress | address}}</p>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table table-hover">
+                    <tbody>
+                    <colgroup>
+                        <col style="width:100px;">
+                    </colgroup>
+                    <tr ng-repeat="lineItem in orderReview.LineItems.Items track by $index" class="item_info">
+                        <td class="text-center">
+                            {{lineItem.Quantity}}
+                        </td>
+                        <td>
+                            <a href="#">{{lineItem.Product.Name}}</a><br>
+                            <small class="text-muted">{{lineItem.ProductID}}</small></br>
+                        </td>
+                        <td ng-if="orderReview.isMultipleAddressShipping">
+                            <label>Shipping To:</label>
+                            <p>{{lineItem.ShippingAddress | address}}</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 </article>

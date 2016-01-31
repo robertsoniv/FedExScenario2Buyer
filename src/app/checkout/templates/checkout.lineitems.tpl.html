@@ -18,7 +18,7 @@
             <tr ng-repeat-start="lineItem in checkoutLI.lineItems.Items track by $index" class="item_info">
                 <td>
                     <form class="form-group" name="{{'lineitem_' + $index + '_quantity'}}">
-                        <input tabindex="{{$index + 1}}" type="number" ng-change="checkoutLI.UpdateQuantity(order, lineItem)" class="form-control text-center" ng-model="lineItem.Quantity">
+                        <input tabindex="{{$index + 1}}" type="number" ng-change="checkoutLI.UpdateQuantity(order, lineItem)" class="form-control text-center" ng-model="lineItem.Quantity" ng-disabled="lineItem.Product.xp.Mandatory">
                     </form>
                 </td>
                 <td>
@@ -31,14 +31,14 @@
                     </button>
                 </td>
             </tr>
-            <tr ng-if="lineItem.ShippingAddress">
+            <tr ng-if="lineItem.ShippingAddress && checkout.isMultipleAddressShipping">
                 <td colspan="3">
                     <p>Shipping To:</p>
                     <p>{{lineItem.ShippingAddress | address:'full'}}</p>
                 </td>
             </tr>
-            <tr ng-repeat-end class="shipping_info">
-                <div ng-if="checkout.isMultipleAddressShipping">
+            <tr ng-repeat-end class="shipping_info" ng-if="checkout.isMultipleAddressShipping">
+                <div>
                     <td colspan="3">
                         <label>Change Shipping Address:</label>
                         <div class="input-group">
