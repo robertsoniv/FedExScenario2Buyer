@@ -47,6 +47,11 @@
                     <p class="list-group-item-text text-muted">{{variant.InteropID}}</p>
                 </a>
             </div>
+            <div>
+                <fieldset>
+                    <button type="submit" class="btn btn-primary" ng-click="product.CreateVariant()">Create New</button>
+                </fieldset>
+            </div>
             <div ng-if="product.selectedVariant">
                 <form name="variable_product_form" ng-submit="product.UpdateVariant()">
                     <variable-product-form formmodel="product.selectedVariant"></variable-product-form>
