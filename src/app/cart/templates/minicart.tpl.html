@@ -9,6 +9,9 @@
         <label class="btn btn-default">{{order.Subtotal | currency}} <i class="fa fa-caret-down"></i></label>
     </div>
     <div id="minicart_line_item_list" uib-dropdown-menu role="menu" class="panel panel-default">
+        <div class="panel-heading">
+            <b>{{minicart.LineItems.Items.length + (minicart.LineItems.Items.length == 1 ? ' item' : ' items') + ' in your cart'}}</b>
+        </div>
         <div class="minicart-body">
             <table class="table table-hover">
                 <!-- <colgroup>
