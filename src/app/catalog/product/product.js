@@ -144,23 +144,30 @@ function SpecSelectionDirective(OrderCloud) {
     };
 }
 
-function ProductController($cookieStore, $http, Product, SpecList, Order, PrintProduct) {
+function ProductController($cookieStore, $timeout, $http, Product, SpecList, Order, PrintProduct) {
     var vm = this;
     vm.item = Product;
     vm.order = Order;
     vm.item.Specs = SpecList;
     vm.printVariants = PrintProduct.data.Variants;
+    vm.showImage = true;
+    vm.imageRefeshTime = new Date();
 
     vm.GetVariant = function(id) {
         var user = $cookieStore.get('print_login');
         $http({ method: 'GET', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/variant', params: {'ProductInteropID': PrintProduct.data.InteropID, 'VariantInteropID': id}, headers: { 'Authorization': user.Auth}}).success(function(data) {
             vm.selectedVariant = data;
         });
-    }
+    };
 
     vm.UpdateVariant = function() {
         var user = $cookieStore.get('print_login');
+        vm.showImage = false;
         $http({ method: 'POST', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/variant', data: vm.selectedVariant, headers: { 'Authorization': user.Auth}}).success(function(data) {
+            $timeout(function() {
+                vm.imageRefeshTime = new Date();
+                return vm.showImage = true;
+            }, 100);
             vm.selectedVariant = data;
         });
     }
