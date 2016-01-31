@@ -11,13 +11,18 @@
     <div id="minicart_line_item_list" uib-dropdown-menu role="menu" class="panel panel-default">
         <div class="minicart-body">
             <table class="table table-hover">
+                <!-- <colgroup>
+					 <col width="100">
+					 <col width="50">
+					 <col width="200">
+				 </colgroup>-->
                 <tr ng-repeat="lineItem in minicart.LineItems.Items">
                     <td>{{lineItem.Quantity}}</td>
                     <td>
                         <a href="#">{{lineItem.Product.Name}}</a><br>
                         <small class="text-muted">{{lineItem.ProductID}}</small></br>
                     </td>
-                    <td style="padding-right: 25px;">
+                    <td>
                         <b class="text-success">{{lineItem.LineTotal | currency}}</b>
                     </td>
                 </tr>
