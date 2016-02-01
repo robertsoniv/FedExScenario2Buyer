@@ -164,10 +164,17 @@ function ProductController($cookieStore, $timeout, $http, Product, SpecList, Ord
     vm.showImage = true;
     vm.imageRefeshTime = new Date();
 
-    vm.GetVariant = function(id) {
+    vm.EditVariant = function(id) {
         var user = $cookieStore.get('print_login');
         $http({ method: 'GET', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/variant', params: {'ProductInteropID': PrintProduct.data.InteropID, 'VariantInteropID': id}, headers: { 'Authorization': user.Auth}}).success(function(data) {
             vm.selectedVariant = data;
+        });
+    };
+
+    vm.SelectVariant = function(id) {
+        var user = $cookieStore.get('print_login');
+        $http({ method: 'GET', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/variant', params: {'ProductInteropID': PrintProduct.data.InteropID, 'VariantInteropID': id}, headers: { 'Authorization': user.Auth}}).success(function(data) {
+            vm.item.variableProduct = data;
         });
     };
 

@@ -68,11 +68,17 @@ function OrderInputController($state, appname, $scope, $rootScope, $localForage,
     }
 
     function AddLineItem(order, product) {
-        OrderCloud.LineItems.Create(order.ID, {
+        var lineItem = {
             ProductID: product.ID,
             Quantity: vm.Quantity,
             Specs: LineItemHelpers.SpecConvert(product.Specs)
-        }).then(function(lineItem) {
+        };
+        if (product.variableProduct) {
+            lineItem.xp = {
+                previewUrl: product.variableProduct.PreviewUrl
+            }
+        }
+        OrderCloud.LineItems.Create(order.ID, lineItem).then(function(lineItem) {
             $rootScope.$broadcast('LineItemAddedToCart', order.ID, lineItem);
         });
     }
