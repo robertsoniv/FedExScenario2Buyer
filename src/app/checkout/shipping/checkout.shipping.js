@@ -10,11 +10,34 @@ function checkoutShippingConfig($stateProvider) {
 			url: '/shipping',
 			templateUrl: 'checkout/shipping/templates/checkout.shipping.tpl.html',
 			controller: 'CheckoutShippingCtrl',
-			controllerAs: 'checkoutShipping'
+			controllerAs: 'checkoutShipping',
+            resolve: {
+                DeliveryMethods: function() {
+                    return [
+                        {
+                            Name: 'FedEx SameDay',
+                            Multiplier: 2
+                        },
+                        {
+                            Name: 'FedEx Standard Overnight',
+                            Multiplier: 1.9
+                        },
+                        {
+                            Name: 'FedEx 2 Day',
+                            Multiplier: 1.5
+                        },
+                        {
+                            Name: 'FedEx Ground',
+                            Multiplier: 1
+                        }
+                    ]
+                }
+
+            }
 		})
 }
 
-function CheckoutShippingController($state, $rootScope, OrderCloud, OrderShippingAddress) {
+function CheckoutShippingController($state, $rootScope, OrderCloud, OrderShippingAddress, DeliveryMethods) {
 	var vm = this;
     vm.saveAddress = null;
     vm.isAlsoBilling = null;
@@ -23,6 +46,7 @@ function CheckoutShippingController($state, $rootScope, OrderCloud, OrderShippin
     vm.SaveCustomAddress = saveCustomAddress;
     vm.customShipping = false;
     vm.shippingAddress = null;
+    vm.deliveryMethods = DeliveryMethods;
 
     function saveShipAddress(order) {
         if (order && order.ShippingAddressID) {

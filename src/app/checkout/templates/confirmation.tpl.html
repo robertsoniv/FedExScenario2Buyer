@@ -13,8 +13,15 @@
     <div class="panel panel-default" ng-if="!orderConfirmation.isMultipleAddressShipping">
         <div class="panel-heading"><b>Shipping Address</b></div>
         <div class="panel-body">
-            <div>
-                <p id="address_paragraph">{{orderConfirmation.lineItems.Items[0].ShippingAddress | address: 'full'}}</p>
+            <div class="row">
+                <div class="col-xs-6">
+                    <p id="address_paragraph">{{orderConfirmation.lineItems.Items[0].ShippingAddress | address: 'full'}}</p>
+                </div>
+                <div class="col-xs-6">
+                    <p><b>Delivery Method: </b><br>
+                        {{orderConfirmation.currentOrder.xp.ShippingMethod.Name}}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -35,6 +42,10 @@
         </div>
     </div>
     <ordercloud-confirmation-lineitems order="orderConfirmation.currentOrder"></ordercloud-confirmation-lineitems>
+    <div class="text-right">
+        <p>Estimated Shipping Cost: <span class="text-success">{{orderConfirmation.currentOrder.xp.ShippingCost | currency}}</span></p>
+        <p class="lead">Subtotal: <span class="text-success">{{orderConfirmation.currentOrder.Subtotal + orderConfirmation.currentOrder.xp.ShippingCost | currency}}</span></p>
+    </div>
     <div class="form-group pull-right">
         <button class="btn btn-default" ui-sref="checkout.shipping">Back</button>
         <button class="btn btn-primary" ng-click="orderConfirmation.submitOrder()">Submit Order</button>

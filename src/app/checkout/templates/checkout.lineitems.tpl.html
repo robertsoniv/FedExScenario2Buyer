@@ -53,6 +53,7 @@
         </table>
     </div>
     <div class="panel-footer">
-        <p class="lead">Subtotal: <span class="text-success pull-right">{{order.Subtotal | currency}}</span></p>
+        <p>Estimated Shipping Cost: <span class="text-success pull-right">{{$parent.checkout.currentOrder.xp.ShippingCost | currency}}</span></p>
+        <p class="lead">Subtotal: <span class="text-success pull-right">{{order.Subtotal + $parent.checkout.currentOrder.xp.ShippingCost | currency}}</span></p>
     </div>
 </div>

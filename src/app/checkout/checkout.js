@@ -119,7 +119,7 @@ function checkoutConfig($stateProvider) {
 
 }
 
-function CheckoutController($state, $rootScope, Order, OrderCloud, ShippingAddresses, OrderShipAddress, OrderShippingAddress, isMultipleAddressShipping) {
+function CheckoutController($state, $rootScope, Order, OrderCloud, ShippingAddresses, OrderShipAddress, OrderShippingAddress, isMultipleAddressShipping, LineItemsList) {
     var vm = this;
     vm.currentOrder = Order;
     vm.currentOrder.ShippingAddressID = OrderShipAddress ? OrderShipAddress.ID : null;
@@ -155,6 +155,19 @@ function CheckoutController($state, $rootScope, Order, OrderCloud, ShippingAddre
         vm.currentOrder.ShippingAddressID = null;
         OrderShippingAddress.Clear();
     });
+
+    vm.calculateShipping = function() {
+        var rate = 0.20 * vm.currentOrder.xp.ShippingMethod.Multiplier;
+        var shippingCost = 0;
+        angular.forEach(LineItemsList.Items, function(li) {
+            shippingCost += li.Product.ShipWeight * rate;
+        });
+        vm.currentOrder.xp.ShippingCost = shippingCost;
+        OrderCloud.Orders.Update(vm.currentOrder.ID, vm.currentOrder)
+            .then(function() {
+                $state.reload();
+            })
+    };
 }
 
 function OrderConfirmationController(Order, CurrentOrder, OrderCloud, $state, OrderShippingAddress, isMultipleAddressShipping, $exceptionHandler, LineItemsList) {
