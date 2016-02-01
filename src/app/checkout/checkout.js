@@ -166,7 +166,7 @@ function OrderConfirmationController(Order, CurrentOrder, OrderCloud, $state, Or
     vm.submitOrder = function() {
         OrderCloud.Orders.Submit(vm.currentOrder.ID)
             .then(function() {
-                OrderShippingAddress.clear();
+                OrderShippingAddress.Clear();
                 CurrentOrder.Remove()
                     .then(function(){
                         $state.go('orderReview', {orderid: vm.currentOrder.ID})
