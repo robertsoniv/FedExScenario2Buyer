@@ -18,8 +18,8 @@ function OrderHistoryConfig( $stateProvider ) {
             controllerAs: 'orderHistory',
             data: {componentName: 'Order History'},
             resolve: {
-                OrderList: function(OrderCloud) {
-                    return OrderCloud.Orders.List('incoming');
+                OrderList: function(OrderCloud, CurrentUser) {
+                    return OrderCloud.Orders.List('outgoing', null, null, null, null, null, null, null, {FromUserID:CurrentUser.ID, Status: '!Unsubmitted'});
                 }
             }
         })
