@@ -75,6 +75,16 @@
     background-color:@navbar-default-bg;
     padding:@padding-base-horizontal;
   }
+  ul li ul {
+    margin-left:15px !important;
+    li {
+      &.active {
+        > a {
+          background-color:lighten(@brand-primary, 15);
+        }
+      }
+    }
+  }
 }
 
 .navbar-flex {

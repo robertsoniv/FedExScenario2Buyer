@@ -2,7 +2,6 @@ angular.module('orderCloud')
 
     .config(CatalogConfig)
     .controller('CatalogCtrl', CatalogController)
-    .controller('CatalogTreeCtrl', CatalogTreeController)
     .directive('ordercloudCategoryList', CategoryListDirective)
     .directive('ordercloudProductList', ProductListDirective)
     .factory('CatalogTreeService', CatalogTreeService)
@@ -22,21 +21,13 @@ function CatalogConfig($stateProvider) {
                     templateUrl: 'catalog/templates/catalog.tpl.html',
                     controller: 'CatalogCtrl',
                     controllerAs: 'catalog'
-                },
-                'left@catalog': {
-                    templateUrl: 'catalog/templates/catalog.tree.tpl.html',
-                    controller: 'CatalogTreeCtrl',
-                    controllerAs: 'catalogTree'
                 }
             },
             resolve: {
-                Tree: function(CatalogTreeService) {
-                    return CatalogTreeService.GetCatalogTree();
-                },
-                Catalog: function($q, OrderCloud, Tree) {
+                Catalog: function($q, OrderCloud) {
                     return OrderCloud.Me.ListCategories(null, 1);
                 },
-                Order: function($q, CurrentOrder, Tree) {
+                Order: function($q, CurrentOrder) {
                     var dfd = $q.defer();
                     CurrentOrder.Get()
                         .then(function(order) {
@@ -53,17 +44,9 @@ function CatalogConfig($stateProvider) {
 
 function CatalogController(Catalog, Order) {
     var vm = this;
-    vm.showTree = true;
+    vm.showTree = false;
     vm.currentOrder = Order;
-    vm.toggleTree = function() {
-        vm.showTree = !vm.showTree;
-    };
     vm.categories = Catalog;
-}
-
-function CatalogTreeController(Tree) {
-    var vm = this;
-    vm.tree = Tree;
 }
 
 function CategoryListDirective() {

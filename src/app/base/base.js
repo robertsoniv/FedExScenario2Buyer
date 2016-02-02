@@ -73,6 +73,9 @@ function BaseConfig( $stateProvider ) {
                     });
                     deferred.resolve(components);
                     return deferred.promise;
+                },
+                Tree: function(CatalogTreeService) {
+                    return CatalogTreeService.GetCatalogTree();
                 }
             }
 		});
@@ -83,8 +86,9 @@ function BaseController(CurrentUser) {
     vm.currentUser = CurrentUser;
 }
 
-function BaseLeftController(ComponentList) {
+function BaseLeftController(ComponentList, Tree) {
     var vm = this;
+    vm.tree = Tree;
     vm.catalogItems = ComponentList.nonSpecific;
     vm.organizationItems = ComponentList.buyerSpecific;
     vm.isCollapsed = true;
