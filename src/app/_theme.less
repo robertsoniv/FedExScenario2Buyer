@@ -1,0 +1,76 @@
+//
+// Scaffolding
+// --------------------------------------------------
+body {
+  color: @black-chili;
+}
+
+
+//
+// Navigation
+// -------------------------
+.logo {
+  text-align: center;
+}
+
+.chili-icon {
+  max-height: 50px;
+}
+
+
+//
+// Typography
+// --------------------------------------------------
+
+@import (less) url(https://fonts.googleapis.com/css?family=Varela+Round);
+
+
+//
+// Buttons
+// --------------------------------------------------
+
+.btn {
+  //Add an inset shadow and offset the bottom padding
+  padding-bottom: @padding-base-vertical + @button-shadow-offset;
+  .box-shadow(@button-shadow);
+
+  &:active,
+  &.active {
+    .box-shadow(@button-shadow);
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    .box-shadow(@button-shadow);
+  }
+}
+
+.btn-link {
+  .box-shadow(none)
+}
+
+//
+// Button groups
+// --------------------------------------------------
+.btn-group {
+  &.open {
+    .dropdown-toggle {
+      .box-shadow(@button-shadow);
+    }
+  }
+}
+
+
+//
+// Pills
+// -------------------------
+
+.nav-pills {
+  > li {
+    > a {
+      text-transform: uppercase;
+      font-size: @font-size-small;
+    }
+  }
+}
