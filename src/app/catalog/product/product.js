@@ -57,9 +57,9 @@ function ProductConfig($stateProvider) {
                         });
                     return dfd.promise;
                 },
-                PrintProduct: function($http, $cookieStore) {
+                PrintProduct: function($http, $cookieStore, $stateParams) {
                     var user = $cookieStore.get('print_login');
-                    return $http({ method: 'GET', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/Products/45178926', headers: { 'Authorization': user.Auth}});
+                    return $http({ method: 'GET', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/Products/' + $stateParams.productid, headers: { 'Authorization': user.Auth}});
                 }
             }
         })
