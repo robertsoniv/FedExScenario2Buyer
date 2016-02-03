@@ -56,15 +56,6 @@
                             <button type="submit" ng-show="!product.selectedVariant" class="btn btn-primary" ng-click="product.CreateVariant()">Create New</button>
                         </fieldset>
                     </div>
-                    <div ng-if="product.selectedVariant">
-                        <form name="variable_product_form" ng-submit="product.UpdateVariant()">
-                            <variable-product-form formmodel="product.selectedVariant"></variable-product-form>
-                            <fieldset>
-                                <button type="button" class="btn btn-default" ng-click="product.selectedVariant = null">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </fieldset>
-                        </form>
-                    </div>
                 </div>
 
                 <div class="panel-footer">
@@ -73,4 +64,13 @@
             </div>
         </div>
     </div>
+</div>
+<div ng-if="product.selectedVariant">
+    <form name="variable_product_form" ng-submit="product.UpdateVariant()">
+        <variable-product-form formmodel="product.selectedVariant"></variable-product-form>
+        <fieldset>
+            <button type="button" class="btn btn-default" ng-click="product.selectedVariant = null">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </fieldset>
+    </form>
 </div>
