@@ -58,9 +58,9 @@ function CartConfig($stateProvider) {
                     return dfd.promise;
                 },
                 UnorderedMandatoryProducts: function(OrderCloud, Underscore, buyerid, LineItemsList) {
-                    return OrderCloud.Products.List()
+                    return OrderCloud.Products.List(null, null, null, null, null, {'xp.Mandatory':true})
                         .then(function(data) {
-                            var mandatoryProducts = Underscore.filter(data.Items, function(item) {return item.xp.Mandatory});
+                            var mandatoryProducts = data.Items;
                             var orderedMandatoryProducts = Underscore.pluck(Underscore.filter(LineItemsList.Items, function(item) {return item.Product.xp.Mandatory}), 'Product');
                             var unorderedMandatoryProductIDs = Underscore.difference(Underscore.pluck(mandatoryProducts, 'ID'), Underscore.pluck(orderedMandatoryProducts, 'ID'));
                             var unorderedMandatoryProducts = Underscore.filter(mandatoryProducts, function(p) {return unorderedMandatoryProductIDs.indexOf(p.ID) > -1});
