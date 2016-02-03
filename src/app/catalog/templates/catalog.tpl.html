@@ -1,13 +1,10 @@
-<article class="container-fluid">
-    <div id="catalog-aside" ui-view="left"></div>
-    <div class="container">
-        <div>
-            <ordercloud-minicart order="catalog.currentOrder" class="pull-right"></ordercloud-minicart>
-            <div class="clearfix"></div>
-            <hr/>
-        </div>
-        <ui-view>
-            <ordercloud-category-list categorylist="catalog.categories.Items"></ordercloud-category-list>
-        </ui-view>
+<article class="container">
+    <div>
+        <ordercloud-minicart order="catalog.currentOrder" class="pull-right"></ordercloud-minicart>
+        <div class="clearfix"></div>
+        <hr/>
     </div>
+    <ui-view>
+        <ordercloud-category-list categorylist="catalog.categories.Items"></ordercloud-category-list>
+    </ui-view>
 </article>
