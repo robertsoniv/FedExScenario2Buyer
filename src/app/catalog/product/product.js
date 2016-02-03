@@ -68,7 +68,7 @@ function ProductConfig($stateProvider) {
         .state('catalog.product.config', {
             url: '/config/:specformid',
             views: {
-                'view@catalog.product': {
+                'specFormView@catalog.product': {
                     templateUrl: function($stateParams) {
                         var spec_form = 'default-spec-form';
                         if ($stateParams.specformid) {

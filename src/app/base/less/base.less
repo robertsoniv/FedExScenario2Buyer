@@ -76,15 +76,17 @@
     padding:@padding-base-horizontal;
   }
   ul li ul {
-    margin-left:15px !important;
-    li {
-      &.active {
-        > a {
-          background-color:lighten(@brand-primary, 15);
-        }
-      }
-    }
+	border-left:1px solid lighten(@gray-light, 35);
+	li {
+	  margin-left:15px !important;
+	  &.active {
+		> a {
+		  background-color:lighten(@brand-primary, 15);
+		}
+	  }
+	}
   }
+
 }
 
 .navbar-flex {
