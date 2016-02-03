@@ -75,7 +75,9 @@ function OrderInputController($state, appname, $scope, $rootScope, $localForage,
         };
         if (product.variableProduct) {
             lineItem.xp = {
-                previewUrl: product.variableProduct.PreviewUrl
+                previewUrl: product.variableProduct.PreviewUrl,
+                productionUrl: product.variableProduct.ProductionURL,
+                proofUrl: product.variableProduct.ProofUrl
             }
         }
         OrderCloud.LineItems.Create(order.ID, lineItem).then(function(lineItem) {
