@@ -4,6 +4,7 @@ angular.module('orderCloud')
     .controller('CartCtrl', CartController)
     .controller('MiniCartCtrl', MiniCartController)
     .directive('ordercloudMinicart', OrderCloudMiniCartDirective)
+    .controller( 'ProofModalCtrl', ProofModalCtrl )
 
 ;
 
@@ -57,9 +58,9 @@ function CartConfig($stateProvider) {
                     return dfd.promise;
                 },
                 UnorderedMandatoryProducts: function(OrderCloud, Underscore, buyerid, LineItemsList) {
-                    return OrderCloud.Products.List()
+                    return OrderCloud.Products.List(null, null, null, null, null, {'xp.Mandatory':true, 'xp.BuyerID':buyerid})
                         .then(function(data) {
-                            var mandatoryProducts = Underscore.filter(data.Items, function(item) {return item.xp.Mandatory});
+                            var mandatoryProducts = data.Items;
                             var orderedMandatoryProducts = Underscore.pluck(Underscore.filter(LineItemsList.Items, function(item) {return item.Product.xp.Mandatory}), 'Product');
                             var unorderedMandatoryProductIDs = Underscore.difference(Underscore.pluck(mandatoryProducts, 'ID'), Underscore.pluck(orderedMandatoryProducts, 'ID'));
                             var unorderedMandatoryProducts = Underscore.filter(mandatoryProducts, function(p) {return unorderedMandatoryProductIDs.indexOf(p.ID) > -1});
@@ -70,7 +71,7 @@ function CartConfig($stateProvider) {
         });
 }
 
-function CartController($q, $rootScope, OrderCloud, Order, LineItemsList, LineItemHelpers, UnorderedMandatoryProducts) {
+function CartController($q, $uibModal, $rootScope, OrderCloud, Order, LineItemsList, LineItemHelpers, UnorderedMandatoryProducts) {
     var vm = this;
     vm.order = Order;
     vm.lineItems = LineItemsList;
@@ -78,6 +79,21 @@ function CartController($q, $rootScope, OrderCloud, Order, LineItemsList, LineIt
     vm.updateQuantity = LineItemHelpers.UpdateQuantity;
     vm.mandatoryProducts = UnorderedMandatoryProducts;
     vm.pagingfunction = PagingFunction;
+
+    vm.viewProof = function(imgUrl) {
+        $uibModal.open({
+            animation: true,
+            templateUrl: 'cart/templates/proof.modal.tpl.html',
+            controller: 'ProofModalCtrl',
+            controllerAs: 'proofModal',
+            size: 'md',
+            resolve: {
+                imageUrl: function() {
+                    return imgUrl;
+                }
+            }
+        })
+    };
 
     function PagingFunction() {
         var dfd = $q.defer();
@@ -158,4 +174,9 @@ function OrderCloudMiniCartDirective() {
         controller: 'MiniCartCtrl',
         controllerAs: 'minicart'
     };
+}
+
+function ProofModalCtrl(imageUrl) {
+    var vm = this;
+    vm.imageUrl = imageUrl;
 }

@@ -1,38 +1,42 @@
-<div id="minicart" uib-dropdown is-open="minicart.showLineItems" ng-if="minicart.LineItems.Items.length">
-    <div class="btn-group" uib-dropdown-toggle>
-        <label class="btn btn-primary">
+<div class="row" ng-if="minicart.LineItems.Items.length">
+    <div id="minicart" uib-dropdown is-open="minicart.showLineItems" class="pull-right">
+        <div class="btn-group" uib-dropdown-toggle>
+            <label class="btn btn-primary">
             <span>
                 <i class="fa fa-shopping-cart"></i>
                 <i class="badge">{{minicart.LineItems.Meta.TotalCount}}</i>
             </span>
-        </label>
-        <label class="btn btn-default">{{order.Subtotal | currency}} <i class="fa fa-caret-down"></i></label>
+            </label>
+            <label class="btn btn-default">{{order.Subtotal | currency}} <i class="fa fa-caret-down"></i></label>
+        </div>
+        <div id="minicart_line_item_list" uib-dropdown-menu role="menu" class="panel panel-default">
+            <div class="panel-heading">
+                <b>{{minicart.LineItems.Items.length + (minicart.LineItems.Items.length == 1 ? ' item' : ' items') + ' in your cart'}}</b>
+            </div>
+            <div class="minicart-body">
+                <table class="table table-hover">
+                    <!-- <colgroup>
+						 <col width="100">
+						 <col width="50">
+						 <col width="200">
+					 </colgroup>-->
+                    <tr ng-repeat="lineItem in minicart.LineItems.Items">
+                        <td>{{lineItem.Quantity}}</td>
+                        <td>
+                            <a href="#">{{lineItem.Product.Name}}</a><br>
+                            <small class="text-muted">{{lineItem.ProductID}}</small></br>
+                        </td>
+                        <td>
+                            <b class="text-success">{{lineItem.LineTotal | currency}}</b>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-info btn-block" ui-sref="cart">Go to Cart</button>
+            </div>
+        </div>
     </div>
-    <div id="minicart_line_item_list" uib-dropdown-menu role="menu" class="panel panel-default">
-        <div class="panel-heading">
-            <b>{{minicart.LineItems.Items.length + (minicart.LineItems.Items.length == 1 ? ' item' : ' items') + ' in your cart'}}</b>
-        </div>
-        <div class="minicart-body">
-            <table class="table table-hover">
-                <!-- <colgroup>
-					 <col width="100">
-					 <col width="50">
-					 <col width="200">
-				 </colgroup>-->
-                <tr ng-repeat="lineItem in minicart.LineItems.Items">
-                    <td>{{lineItem.Quantity}}</td>
-                    <td>
-                        <a href="#">{{lineItem.Product.Name}}</a><br>
-                        <small class="text-muted">{{lineItem.ProductID}}</small></br>
-                    </td>
-                    <td>
-                        <b class="text-success">{{lineItem.LineTotal | currency}}</b>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="panel-footer">
-            <button class="btn btn-info btn-block" ui-sref="cart">Go to Cart</button>
-        </div>
-    </div>
+    <div class="clearfix"></div>
+    <hr>
 </div>

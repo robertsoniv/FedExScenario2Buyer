@@ -1,11 +1,11 @@
 <div ng-form="variable_product_form" ng-show="$parent.$parent.product.item.ID == '45178926'">
 	<div class="row">
-		<div class="col-xs-6">
+		<div class="col-xs-6" ng-if="$parent.$parent.product.showImage && formmodel.PreviewUrl">
 			<figure>
-				<img ng-if="$parent.$parent.product.showImage" class="img-thumbnail" ng-src="{{formmodel.PreviewUrl + '?time=' + $parent.$parent.product.imageRefeshTime.getTime()}}"/>
+				<img class="img-thumbnail" ng-src="{{formmodel.PreviewUrl + '?time=' + $parent.$parent.product.imageRefeshTime.getTime()}}"/>
 			</figure>
 		</div>
-		<div class="col-xs-6">
+		<div ng-class="{'col-xs-6':formmodel.PreviewUrl, 'col-xs-12': !formmodel.PreviewUrl}">
 			<h4 class="page-header">Update variant</h4>
 			<fieldset class="form-group row">
 				<div class="col-sm-6">

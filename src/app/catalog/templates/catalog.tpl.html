@@ -5,11 +5,7 @@
     </div>
 </div>
 <article class="container">
-    <div>
-        <ordercloud-minicart order="catalog.currentOrder" class="pull-right"></ordercloud-minicart>
-        <div class="clearfix"></div>
-        <hr/>
-    </div>
+    <ordercloud-minicart order="catalog.currentOrder"></ordercloud-minicart>
     <ui-view>
         <ordercloud-category-list categorylist="catalog.categories.Items"></ordercloud-category-list>
     </ui-view>

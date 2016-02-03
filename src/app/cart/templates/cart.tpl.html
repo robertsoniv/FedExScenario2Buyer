@@ -38,9 +38,11 @@
                             </form>
                         </td>
                         <td>
-                            <figure style="width: 100px;">
-                                <img ng-if="lineItem.Product.xp.image" class="img-responsive" ng-src="{{lineItem.Product.xp.image.URL}}" alt="Product Image">
-                            </figure>
+                            <a ng-href="{{lineItem.xp.proofUrl}}">
+                                <figure style="width: 100px;" uib-tooltip="View Proof">
+                                    <img ng-if="lineItem.Product.xp.image" class="img-responsive" ng-src="{{lineItem.Product.xp.image.URL}}" alt="Product Image">
+                                </figure>
+                            </a>
                         </td>
                         <td>
                             <a href="#">{{lineItem.Product.Name}}</a><br>
