@@ -57,9 +57,11 @@ function ProductConfig($stateProvider) {
                         });
                     return dfd.promise;
                 },
-                PrintProduct: function($http, $cookieStore, $stateParams) {
-                    var user = $cookieStore.get('print_login');
-                    return $http({ method: 'GET', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/Products/' + $stateParams.productid, headers: { 'Authorization': user.Auth}});
+                PrintProduct: function($http, $cookieStore, $stateParams, Product) {
+                    if (Product.xp.Type == 'Variable') {
+                        var user = $cookieStore.get('print_login');
+                        return $http({ method: 'GET', url: 'https://fedexoffice.four51ordercloud.com/api/Chilis/Products/' + $stateParams.productid, headers: { 'Authorization': user.Auth}});
+                    }
                 }
             }
         })
@@ -160,7 +162,7 @@ function ProductController($cookieStore, $timeout, $http, Product, SpecList, Ord
     vm.item = Product;
     vm.order = Order;
     vm.item.Specs = SpecList;
-    vm.printVariants = PrintProduct.data.Variants;
+    if (vm.item.xp.Type == 'Variable') vm.printVariants = PrintProduct.data.Variants;
     vm.showImage = true;
     vm.imageRefeshTime = new Date();
 
