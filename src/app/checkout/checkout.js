@@ -170,7 +170,7 @@ function CheckoutController($state, $rootScope, Order, OrderCloud, ShippingAddre
     };
 }
 
-function OrderConfirmationController(Order, CurrentOrder, OrderCloud, $state, OrderShippingAddress, isMultipleAddressShipping, $exceptionHandler, LineItemsList) {
+function OrderConfirmationController($resource, Order, CurrentOrder, OrderCloud, $state, OrderShippingAddress, isMultipleAddressShipping, $exceptionHandler, LineItemsList) {
     var vm = this;
     vm.currentOrder = Order;
     vm.lineItems = LineItemsList;
@@ -179,6 +179,15 @@ function OrderConfirmationController(Order, CurrentOrder, OrderCloud, $state, Or
     vm.submitOrder = function() {
         OrderCloud.Orders.Submit(vm.currentOrder.ID)
             .then(function() {
+                angular.forEach(vm.lineItems.Items, function(li) {
+                    var sendEmail = false;
+                    if (li.ProductID == '45178926') sendEmail = true;
+                });
+                if (sendEmail) {
+                    $resource('https://oc-status-app.herokuapp.com/sendquickemail').save({
+                        'email':'iobrien@four51.com'
+                    });
+                }
                 OrderShippingAddress.Clear();
                 CurrentOrder.Remove()
                     .then(function(){
