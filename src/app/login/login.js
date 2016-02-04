@@ -80,7 +80,7 @@ function LoginController( $state, $stateParams, $exceptionHandler, OrderCloud, L
             .then(function(data) {
                 OrderCloud.BuyerID.Set(buyerid);
                 OrderCloud.Auth.SetToken(data['access_token']);
-                $state.go('home');
+                $state.go('catalog');
             })
             .catch(function(ex) {
                 $exceptionHandler(ex);
