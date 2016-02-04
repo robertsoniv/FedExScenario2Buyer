@@ -14,6 +14,13 @@ function HomeConfig( $stateProvider ) {
 			controller: 'HomeCtrl',
 			controllerAs: 'home'
 		})
+		.state( 'storeprofile', {
+			parent: 'base',
+			url: '/storeprofile',
+			templateUrl: 'home/templates/storeprofile.tpl.html',
+			controller: 'HomeCtrl',
+			controllerAs: 'home'
+		})
 }
 
 function HomeController( ) {
