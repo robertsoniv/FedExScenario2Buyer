@@ -30,7 +30,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="order in orderHistory.orders.Items track by $index">
-                        <td ui-sref="orderHistory.detail({orderid: order.ID})">{{order.ID}}</td>
+                        <td ui-sref="orderHistory.detail({orderid: order.ID})">CPOSBBD{{(order.Total) * 100 + 8}}</td>
                         <td>{{order.Status}}</td>
                         <td>{{(order.DateSubmitted ||  order.DateCreated) | date}}</td>
                         <td>{{order.Total | currency}}</td>
