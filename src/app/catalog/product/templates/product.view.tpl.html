@@ -48,7 +48,7 @@
 
                             <button class="btn btn-default pull-right" ng-click="product.EditVariant(variant.InteropID)">Edit</button>
                             <b class="list-group-item-header">{{variant.ExternalID}}</b>
-                            <!--sorry rob --> <p class="list-group-item-text text-muted" style="color: white;">_</p>
+                            <!--sorry rob --> <p class="list-group-item-text text-muted" style="color: transparent;">_</p>
                         </a>
                     </div>
                     <div>
@@ -59,18 +59,23 @@
                 </div>
 
                 <div class="panel-footer">
+                    <div class="checkbox" ng-if="product.item.ID == 'ChilisDMPostcard'">
+                        <label class="control-label">
+                            <input ng-model="product.selectedVariant.approved" type="checkbox" required/> I have reviewed and approve this proof.
+                        </label>
+                    </div>
                     <ordercloud-order-input validationform="product_spec_form" product="product.item"></ordercloud-order-input>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div ng-if="product.selectedVariant">
+<div ng-if="product.selectedVariant.ProductInteropID">
     <form name="variable_product_form" ng-submit="product.UpdateVariant()">
-        <variable-product-form formmodel="product.selectedVariant"></variable-product-form>
+        <variable-product-form user="base.currentUser" formmodel="product.selectedVariant"></variable-product-form>
         <fieldset>
             <button type="button" class="btn btn-default" ng-click="product.selectedVariant = null">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="variable_product_form.$invalid">Save</button>
         </fieldset>
     </form>
 </div>

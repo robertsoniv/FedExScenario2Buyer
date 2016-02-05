@@ -35,7 +35,12 @@ function BaseConfig( $stateProvider ) {
                     var dfd = $q.defer();
                     OrderCloud.Me.Get()
                         .then(function(data) {
-                            dfd.resolve(data);
+                            OrderCloud.Me.ListUserGroups()
+                                .then(function(dataUG){
+                                    data.profile = dataUG;
+                                    console.log(data);
+                                    dfd.resolve(data);
+                                });
                         })
                         .catch(function(){
                             OrderCloud.Auth.RemoveToken();

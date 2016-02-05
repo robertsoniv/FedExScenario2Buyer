@@ -12,7 +12,8 @@ function VariableProductFormDirective() {
     return {
         restrict: 'E',
         scope: {
-            formmodel: '='
+            formmodel: '=',
+            user: '='
         },
         templateUrl: 'catalog/product/templates/variableProduct.form.tpl.html'
     };
