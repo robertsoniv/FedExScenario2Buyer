@@ -179,8 +179,8 @@ function OrderConfirmationController($resource, Order, CurrentOrder, OrderCloud,
     vm.submitOrder = function() {
         OrderCloud.Orders.Submit(vm.currentOrder.ID)
             .then(function() {
+                var sendEmail = false;
                 angular.forEach(vm.lineItems.Items, function(li) {
-                    var sendEmail = false;
                     if (li.ProductID == '45178926') sendEmail = true;
                 });
                 if (sendEmail) {

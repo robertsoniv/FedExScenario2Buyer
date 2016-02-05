@@ -57,7 +57,7 @@
 		<input id="{{formmodel.Specs.Logo_upload.ID}}" type="text" class="form-control" ng-model="formmodel.Specs.Logo_upload.Value"/>
 	</fieldset>
 </div>
-<div ng-form="variable_product_form" ng-show="$parent.$parent.product.item.ID == 'ChilisDMPostcard'">
+<div ng-form="variable_product_form" ng-show="$parent.$parent.product.item.ID == 'ChilisDMPostcard'" >
 	<div class="row">
 		<div class="col-xs-6">
 			<figure>
@@ -69,13 +69,13 @@
 			<fieldset class="form-group row">
 				<div class="col-sm-6">
 					<label for="{{formmodel.Specs.Template.ID}}">{{formmodel.Specs.Template.Name}}</label>
-					<select class="form-control" ng-options="item.Value as item.Value for item in formmodel.Specs.Template.Options" ng-model="formmodel.Specs.Template.Value"></select>
+					<select id="{{formmodel.Specs.Template.ID}}" class="form-control" ng-options="item.Value as item.Value for item in formmodel.Specs.Template.Options" ng-model="formmodel.Specs.Template.Value"></select>
 				</div>
 			</fieldset>
-			<fieldset class="form-group row">
-				<div class="col-sm-6">
+			<fieldset class="form-group row demographic">
+				<div class="col-sm-6" ng-init="formmodel.Specs.Demographic.Value = user.profile.Items[0].xp.Demographic.toLowerCase();">
 					<label for="{{formmodel.Specs.Demographic.ID}}">{{formmodel.Specs.Demographic.Name}} {{formmodel.Specs.Demographic.Value}}</label>
-					<select class="form-control" ng-options="item.Value as item.Value for item in formmodel.Specs.Demographic.Options" ng-model="formmodel.Specs.Demographic.Value"></select>
+					<input id="{{formmodel.Specs.Demographic.ID}}" disabled="true" class="form-control" ng-model="formmodel.Specs.Demographic.Value">
 				</div>
 			</fieldset>
 			<fieldset class="form-group">
@@ -84,7 +84,7 @@
 			</fieldset>
 			<fieldset class="form-group">
 				<label for="{{formmodel.Specs.Income.ID}}">{{formmodel.Specs.Income.Name}}</label>
-				<select class="form-control" ng-options="item.Value as item.Value for item in formmodel.Specs.Income.Options" ng-model="formmodel.Specs.Income.Value"></select>
+				<select id="{{formmodel.Specs.Income.ID}}" class="form-control" ng-options="item.Value as item.Value for item in formmodel.Specs.Income.Options" ng-model="formmodel.Specs.Income.Value"></select>
 			</fieldset>
 			<fieldset class="form-group">
 				<label for="{{formmodel.Specs.SaveAs.ID}}">Save As</label>
