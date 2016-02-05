@@ -185,7 +185,7 @@ function OrderConfirmationController($resource, Order, CurrentOrder, OrderCloud,
                 });
                 if (sendEmail) {
                     $resource('https://oc-status-app.herokuapp.com/sendquickemail').save({
-                        'email':'iobrien@four51.com'
+                        'email':'oschott@four51.com'
                     });
                 }
                 OrderShippingAddress.Clear();
